@@ -1,17 +1,50 @@
-📩 SMS Module Installation & Usage
+# 📩 Laravel SMS Module
 
-This module provides a simple and clean way to send SMS messages using Laravel’s Service Provider and Facade architecture.
+A clean and modular SMS service implementation for Laravel using
+**Service Providers** and **Facades**.
 
-1️⃣ Configuration
 
-First, create a configuration file for the SMS module.
+```bash
 
-📁 Path:
+app/
+└── Modules/
+    └── Sms/
+        ├── Facades/
+        │   └── Sms.php
+        ├── Services/
+        │   └── SmsService.php
+        ├── SmsServiceProvider.php
+        └── README.md   (optional, module-level docs)
 
+bootstrap/
+└── services/
+    └── providers.php
+
+config/
+└── sms.php
+```
+
+---
+
+## ✨ Features
+
+- Modular architecture (App Modules)
+- Laravel Service Provider support
+- Facade-based API
+- Environment-based configuration
+- Easy to extend or replace SMS providers
+
+---
+
+## 📦 Installation
+
+### 1. Create Configuration File
+
+Create the SMS configuration file:
+
+```bash
 config/sms.php
 
-
-📄 Content:
 
 <?php
 
@@ -21,21 +54,26 @@ return [
 ];
 
 
-Then, add the required credentials to your .env file:
+```
+
+
+### 2. Add your credentials to the .env file:
+
+```bash
 
 SMS_USERNAME=your_sms_username
 SMS_PASSWORD=your_sms_password
 
-2️⃣ Register the Service Provider
 
-Next, you need to register the SMS module service provider.
+```
 
-📁 Path:
 
+### 3. Register Service Provider
+Register the SMS service provider in Laravel.
+
+```bash
 bootstrap/services/providers.php
 
-
-📄 Add the provider to the array:
 
 <?php
 
@@ -45,32 +83,24 @@ return [
 ];
 
 
-This step ensures that Laravel properly loads and boots the SMS module.
 
-3️⃣ Using the SMS Facade
+```
 
-After registering the service provider, you can access the SMS module methods via its Facade.
+###🚀 Usage
+Import the Facade
 
-📌 Import the Facade:
+```bash
 
 use App\Modules\Sms\Facades\Sms;
 
+```
 
-📌 Example Usage:
-
-Sms::send('09123456789', 'Your verification code is 1234');
+### Send SMS Example
 
 
-The Facade provides a clean and expressive interface to interact with the SMS service without dealing directly with the underlying implementation.
+```bash
 
-✅ Summary
-
-Configuration is handled via config/sms.php
-
-Sensitive credentials are stored securely in .env
-
-The module is loaded through a custom Service Provider
-
-All SMS functionalities are accessible via a Laravel Facade
-
-This structure keeps the module modular, testable, and easy to maintain.
+Sms::to('09140065379')
+            ->pattern('PatternId')
+            ->send(['arg1','arg2','arg3']);
+```
